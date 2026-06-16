@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>우리집 식물 관리 노트</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="hero">
+      <img class="hero__image" src="assets/indoor-plants-hero.png" alt="햇빛이 드는 실내 테이블 위의 여러 화분">
+      <div class="hero__shade"></div>
+      <nav class="topbar" aria-label="주요 메뉴">
+        <a class="brand" href="#">Plant Notes</a>
+        <div class="topbar__links">
+          <a href="#plants">식물별 관리</a>
+          <a href="#comparison">환경 비교</a>
+          <a href="#routine">물주기 루틴</a>
+        </div>
+      </nav>
+      <section class="hero__content">
+        <p class="eyebrow">집에서 키우는 식물들을 위한 맞춤 관리표</p>
+        <h1>식물마다 다른 빛, 물, 흙 상태를 한눈에 정리하세요.</h1>
+        <p>
+          오렌지자스민, 스킨답서스, 로즈마리, 바질, 버터헤드, 녹보수처럼 성격이 다른 식물들을
+          같은 기준으로 묶지 않고 각각의 리듬에 맞춰 관리할 수 있게 구성했습니다.
+        </p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="#plants">관리표 보기</a>
+          <a class="button button--ghost" href="#routine">오늘 루틴 확인</a>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="toolbar" aria-label="식물 검색과 필터">
+        <label class="search">
+          <span>검색</span>
+          <input id="searchInput" type="search" placeholder="예: 바질, 밝은 빛, 겉흙">
+        </label>
+        <div class="chips" id="filterChips" aria-label="식물 분류 필터">
+          <button class="chip is-active" type="button" data-filter="all">전체</button>
+          <button class="chip" type="button" data-filter="flower">꽃/향</button>
+          <button class="chip" type="button" data-filter="foliage">관엽</button>
+          <button class="chip" type="button" data-filter="herb">허브</button>
+          <button class="chip" type="button" data-filter="edible">먹는 잎채소</button>
+        </div>
+      </section>
+
+      <section class="section" id="plants">
+        <div class="section__heading">
+          <p class="eyebrow">Plant Care Cards</p>
+          <h2>식물별 좋아하는 환경</h2>
+        </div>
+        <div class="plant-grid" id="plantGrid"></div>
+      </section>
+
+      <section class="comparison" id="comparison">
+        <div class="section__heading">
+          <p class="eyebrow">Quick Compare</p>
+          <h2>빛과 물 요구량 비교</h2>
+        </div>
+        <div class="comparison__table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>식물</th>
+                <th>빛</th>
+                <th>물주기 기준</th>
+                <th>까다로운 포인트</th>
+              </tr>
+            </thead>
+            <tbody id="comparisonRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="routine" id="routine">
+        <div>
+          <p class="eyebrow">Watering Routine</p>
+          <h2>물을 주기 전 3단계</h2>
+        </div>
+        <ol class="routine__steps">
+          <li>
+            <strong>흙 상태 확인</strong>
+            손가락 한 마디 또는 나무젓가락으로 속흙까지 확인합니다.
+          </li>
+          <li>
+            <strong>화분 무게 비교</strong>
+            물 준 직후와 마른 상태의 무게 차이를 기억하면 과습을 줄일 수 있습니다.
+          </li>
+          <li>
+            <strong>흠뻑 주고 배수</strong>
+            필요한 식물에는 배수구로 물이 빠질 만큼 주고, 받침 물은 비웁니다.
+          </li>
+        </ol>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
