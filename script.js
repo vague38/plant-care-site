@@ -1,13 +1,5 @@
 const people = [
   {
-    id: "all",
-    name: "전체 도감",
-    subtitle: "모든 식물을 한 번에 보기",
-    environment: "사람별 노트를 선택하면 해당 집에서 키우는 식물만 모아 볼 수 있습니다.",
-    focus: "검색과 분류 필터로 전체 식물의 빛, 물주기, 주의 신호를 비교하세요.",
-    plants: []
-  },
-  {
     id: "trainer",
     name: "조련사",
     subtitle: "허브, 잎채소, 꽃식물, 관엽이 섞인 다품종 구성",
@@ -277,7 +269,7 @@ const plantSectionTitle = document.querySelector("#plantSectionTitle");
 const activeProfileNote = document.querySelector("#activeProfileNote");
 
 let activeFilter = "all";
-let activePersonId = "all";
+let activePersonId = "trainer";
 
 function getActivePerson() {
   return people.find((person) => person.id === activePersonId) || people[0];
@@ -285,17 +277,13 @@ function getActivePerson() {
 
 function getVisiblePlants() {
   const activePerson = getActivePerson();
-  if (activePerson.id === "all") {
-    return plants;
-  }
-
   return activePerson.plants.map((name) => plantByName.get(name)).filter(Boolean);
 }
 
 function makePersonCard(person) {
   const isActive = person.id === activePersonId;
-  const plantCount = person.id === "all" ? plants.length : person.plants.length;
-  const previewPlants = person.id === "all" ? "전체 식물 보기" : person.plants.slice(0, 5).join(", ");
+  const plantCount = person.plants.length;
+  const previewPlants = person.plants.slice(0, 6).join(", ");
 
   return `
     <button class="person-card ${isActive ? "is-active" : ""}" type="button" data-person="${person.id}">
@@ -389,7 +377,7 @@ function render() {
     return filterMatch && matchesSearch(plant, query);
   });
 
-  plantSectionTitle.textContent = activePerson.id === "all" ? "전체 식물별 좋아하는 환경" : `${activePerson.name}의 식물 노트`;
+  plantSectionTitle.textContent = `${activePerson.name}의 식물 노트`;
   activeProfileNote.textContent = `${activePerson.environment} ${activePerson.focus}`;
   grid.innerHTML = filtered.map(makeCard).join("");
   rows.innerHTML = filtered.map(makeRow).join("");
