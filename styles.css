@@ -211,6 +211,7 @@ main {
   border-color: var(--leaf);
 }
 
+.people-section,
 .section,
 .comparison,
 .routine {
@@ -222,11 +223,101 @@ main {
   margin-bottom: 20px;
 }
 
+.section__note {
+  max-width: 880px;
+  margin: 12px 0 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
 h2 {
   margin: 0;
   color: var(--leaf-dark);
   font-size: clamp(1.75rem, 3vw, 2.8rem);
   letter-spacing: 0;
+}
+
+.people-section {
+  display: grid;
+  gap: 20px;
+}
+
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+}
+
+.person-card {
+  min-height: 192px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-content: start;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  color: var(--ink);
+  background: var(--white);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  box-shadow: 0 12px 26px rgba(31, 42, 36, 0.08);
+}
+
+.person-card:hover,
+.person-card.is-active {
+  border-color: var(--leaf);
+  box-shadow: 0 16px 34px rgba(31, 42, 36, 0.13);
+}
+
+.person-card.is-active {
+  background: linear-gradient(135deg, var(--leaf-dark), var(--leaf));
+  color: var(--white);
+}
+
+.person-card__name {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: inherit;
+}
+
+.person-card__count {
+  justify-self: end;
+  border-radius: 999px;
+  padding: 6px 10px;
+  color: var(--leaf-dark);
+  background: var(--mint);
+  font-weight: 900;
+  font-size: 0.82rem;
+}
+
+.person-card.is-active .person-card__count {
+  color: var(--leaf-dark);
+  background: var(--sun);
+}
+
+.person-card__subtitle,
+.person-card__plants {
+  grid-column: 1 / -1;
+  line-height: 1.55;
+}
+
+.person-card__subtitle {
+  color: var(--muted);
+}
+
+.person-card.is-active .person-card__subtitle {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.person-card__plants {
+  color: var(--soil);
+  font-weight: 800;
+}
+
+.person-card.is-active .person-card__plants {
+  color: var(--sun);
 }
 
 .plant-grid {

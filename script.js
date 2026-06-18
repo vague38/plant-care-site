@@ -1,3 +1,38 @@
+const people = [
+  {
+    id: "all",
+    name: "전체 도감",
+    subtitle: "모든 식물을 한 번에 보기",
+    environment: "사람별 노트를 선택하면 해당 집에서 키우는 식물만 모아 볼 수 있습니다.",
+    focus: "검색과 분류 필터로 전체 식물의 빛, 물주기, 주의 신호를 비교하세요.",
+    plants: []
+  },
+  {
+    id: "trainer",
+    name: "조련사",
+    subtitle: "허브, 잎채소, 꽃식물, 관엽이 섞인 다품종 구성",
+    environment: "집 환경 메모 입력 예정. 현재는 물마름에 민감한 채소와 통풍이 중요한 허브를 우선 확인하세요.",
+    focus: "바질, 로켓루꼴라, 버터헤드는 마름을 자주 보고, 로즈마리와 올리브 계열 식물은 빛과 통풍을 우선합니다.",
+    plants: ["바질", "로켓루꼴라", "버터헤드", "로즈마리", "수국", "오렌지자스민", "가지", "숙근버베나", "녹보수", "마삭줄", "스노우화이트", "엔조이스킨"]
+  },
+  {
+    id: "az",
+    name: "아즈",
+    subtitle: "꽃과 향, 햇빛을 좋아하는 나무 중심",
+    environment: "집 환경 메모 입력 예정. 꽃봉오리와 잎 처짐을 보면 물마름, 빛, 온도 변화를 함께 확인하세요.",
+    focus: "수국과 치자는 물마름에 약하고, 올리브나무는 강한 빛과 배수를 좋아합니다.",
+    plants: ["바질", "카네이션", "수국", "오렌지자스민", "치자", "올리브나무"]
+  },
+  {
+    id: "thomas",
+    name: "Thomas",
+    subtitle: "수확형 채소와 실내 관엽을 함께 키우는 구성",
+    environment: "집 환경 메모 입력 예정. 잎채소는 마름을 줄이고, 관엽은 과습과 빛 부족을 나눠 확인하세요.",
+    focus: "부추, 상추류는 규칙적인 수분이 중요하고, 로즈마리는 빛과 통풍을 우선해서 확인하세요.",
+    plants: ["부추", "아삭이고추", "스킨답서스", "수국", "가지", "적상추", "청상추", "스노우사파이어", "로즈마리"]
+  }
+];
+
 const plants = [
   {
     name: "오렌지자스민",
@@ -77,7 +112,7 @@ const plants = [
     tags: ["향기로운 꽃", "습도 선호", "환경 변화 주의"]
   },
   {
-    name: "올리브",
+    name: "올리브나무",
     type: "햇빛을 많이 좋아하는 지중해성 나무",
     category: "foliage",
     icon: "○",
@@ -85,7 +120,7 @@ const plants = [
     water: "속흙이 충분히 마른 뒤 흠뻑 줍니다. 늘 축축한 흙보다 건조와 배수가 중요합니다.",
     environment: "통풍이 좋고 건조한 환경을 선호합니다. 겨울에는 밝고 서늘한 곳에서 과습을 피합니다.",
     warning: "잎이 말리거나 우수수 떨어지면 빛 부족, 물마름, 과습 중 어느 쪽인지 흙 상태부터 확인하세요.",
-    tags: ["강한 햇빛", "배수 중요", "건조 선호"]
+    tags: ["올리브", "강한 햇빛", "배수 중요", "건조 선호"]
   },
   {
     name: "수국",
@@ -121,7 +156,7 @@ const plants = [
     tags: ["강한 햇빛", "큰 화분", "지지대"]
   },
   {
-    name: "고추",
+    name: "아삭이고추",
     type: "햇빛을 많이 받을수록 열매가 잘 맺히는 열매채소",
     category: "edible",
     icon: "◊",
@@ -129,7 +164,7 @@ const plants = [
     water: "겉흙이 마르면 흠뻑 줍니다. 너무 말리면 꽃과 어린 열매가 떨어질 수 있고, 과습은 뿌리를 약하게 합니다.",
     environment: "20도 이상 따뜻하고 통풍 좋은 곳이 좋습니다. 꽃이 피면 가볍게 흔들어 수분을 도와줄 수 있습니다.",
     warning: "잎이 축 처지거나 열매 끝이 상하면 물주기 불균형, 고온, 칼슘 부족 가능성을 살펴보세요.",
-    tags: ["직사광 선호", "통풍", "수분 도움"]
+    tags: ["고추", "직사광 선호", "통풍", "수분 도움"]
   },
   {
     name: "부추",
@@ -152,15 +187,125 @@ const plants = [
     environment: "서늘한 15~22도에서 맛이 좋습니다. 더운 환경에서는 꽃대가 빨리 올라올 수 있습니다.",
     warning: "꽃대가 올라오면 잎 맛이 강해지고 질겨질 수 있어 어린잎을 자주 수확하세요.",
     tags: ["빠른 수확", "서늘하게", "마름 주의"]
+  },
+  {
+    name: "마삭줄",
+    type: "향기로운 꽃을 피울 수 있는 덩굴성 식물",
+    category: "flower",
+    icon: "✧",
+    light: "밝은 간접광부터 오전 햇빛까지 잘 맞습니다. 너무 어두우면 꽃과 새순이 약해질 수 있습니다.",
+    water: "겉흙이 마르면 충분히 줍니다. 잎이 많은 덩굴이라 더운 계절에는 마름을 자주 확인합니다.",
+    environment: "통풍 좋은 창가나 베란다가 좋습니다. 줄기가 길어지면 방향을 잡아주거나 가볍게 정리하세요.",
+    warning: "잎 끝이 마르거나 새순이 약하면 빛 부족, 건조, 통풍 부족을 확인하세요.",
+    tags: ["덩굴성", "밝은 창가", "통풍"]
+  },
+  {
+    name: "스노우화이트",
+    type: "밝은 무늬 잎이 돋보이는 실내 관엽식물",
+    category: "foliage",
+    icon: "□",
+    light: "밝은 간접광이 좋습니다. 무늬 잎은 빛이 너무 약하면 색이 흐려지고, 직사광은 잎을 태울 수 있습니다.",
+    water: "겉흙이 마른 뒤 물을 줍니다. 흙이 계속 젖어 있으면 뿌리와 줄기가 약해집니다.",
+    environment: "따뜻하고 안정적인 실내, 은은한 통풍이 좋습니다. 겨울 찬바람은 피합니다.",
+    warning: "잎이 노랗게 변하거나 줄기가 물러지면 과습 가능성을 먼저 확인하세요.",
+    tags: ["무늬 잎", "밝은 간접광", "과습 주의"]
+  },
+  {
+    name: "엔조이스킨",
+    type: "무늬가 선명한 스킨답서스 계열 관엽식물",
+    category: "foliage",
+    icon: "◇",
+    light: "밝은 간접광에서 무늬가 선명합니다. 약한 빛도 견디지만 새잎 무늬가 줄 수 있습니다.",
+    water: "겉흙이 충분히 마른 뒤 줍니다. 일반 스킨답서스처럼 과습보다 살짝 말렸다 주는 편이 안전합니다.",
+    environment: "보통 실내 습도에서도 잘 자라며, 찬바람과 물고임을 피하면 관리가 쉽습니다.",
+    warning: "잎이 축 처지면 물마름을, 잎이 누렇게 무르면 과습을 의심하세요.",
+    tags: ["스킨답서스", "무늬 잎", "반음지 가능"]
+  },
+  {
+    name: "카네이션",
+    type: "햇빛과 서늘한 공기를 좋아하는 꽃식물",
+    category: "flower",
+    icon: "✹",
+    light: "밝은 빛과 오전 햇빛을 좋아합니다. 빛이 부족하면 꽃대가 약해지고 꽃이 오래가지 않습니다.",
+    water: "겉흙이 마르면 물을 주되 꽃과 잎 사이가 오래 젖어 있지 않게 합니다.",
+    environment: "서늘하고 통풍 좋은 창가나 베란다가 좋습니다. 고온다습한 환경에서는 꽃이 빨리 상할 수 있습니다.",
+    warning: "꽃이 갈변하거나 줄기가 물러지면 과습, 통풍 부족, 높은 온도를 확인하세요.",
+    tags: ["오전 햇빛", "서늘하게", "통풍"]
+  },
+  {
+    name: "적상추",
+    type: "색이 진한 잎을 수확하는 상추류",
+    category: "edible",
+    icon: "☘",
+    light: "밝은 빛이 필요하지만 한여름 강한 오후 햇빛은 잎을 질기게 할 수 있습니다.",
+    water: "흙이 마르지 않게 관리합니다. 물마름이 반복되면 잎이 억세지고 쓴맛이 강해질 수 있습니다.",
+    environment: "서늘한 15~22도와 통풍 좋은 장소가 좋습니다. 더우면 꽃대가 빨리 올라올 수 있습니다.",
+    warning: "잎 끝이 마르거나 쓴맛이 강해지면 고온과 물마름을 먼저 확인하세요.",
+    tags: ["상추", "서늘하게", "마름 주의"]
+  },
+  {
+    name: "청상추",
+    type: "부드러운 잎을 계속 수확하는 상추류",
+    category: "edible",
+    icon: "☘",
+    light: "밝은 빛에서 잘 자라며, 여름에는 강한 직사광보다 오전 햇빛이 안정적입니다.",
+    water: "흙을 촉촉하게 유지하되 물고임은 피합니다. 잎채소라 건조 스트레스에 약합니다.",
+    environment: "서늘하고 통풍 좋은 창가나 베란다가 좋습니다. 바깥잎부터 수확하면 오래 먹을 수 있습니다.",
+    warning: "잎이 축 처지면 물마름, 줄기가 길어지면 빛 부족이나 고온을 확인하세요.",
+    tags: ["상추", "반복 수확", "촉촉하게"]
+  },
+  {
+    name: "스노우사파이어",
+    type: "흰 무늬가 있는 실내 관엽식물",
+    category: "foliage",
+    icon: "▣",
+    light: "밝은 간접광에서 무늬가 깨끗하게 유지됩니다. 직사광은 잎 끝을 태울 수 있습니다.",
+    water: "겉흙이 마른 뒤 충분히 줍니다. 큰 화분이라면 속흙 마름까지 확인하는 편이 안전합니다.",
+    environment: "따뜻한 실내와 안정적인 습도를 좋아합니다. 에어컨 바람이나 겨울 찬바람은 피합니다.",
+    warning: "잎이 누렇게 변하면 과습, 갈색으로 마르면 건조나 직사광을 확인하세요.",
+    tags: ["무늬 잎", "밝은 간접광", "찬바람 주의"]
   }
 ];
 
+const plantByName = new Map(plants.map((plant) => [plant.name, plant]));
+const peopleGrid = document.querySelector("#peopleGrid");
 const grid = document.querySelector("#plantGrid");
 const rows = document.querySelector("#comparisonRows");
 const searchInput = document.querySelector("#searchInput");
 const chips = document.querySelectorAll(".chip");
+const plantSectionTitle = document.querySelector("#plantSectionTitle");
+const activeProfileNote = document.querySelector("#activeProfileNote");
 
 let activeFilter = "all";
+let activePersonId = "all";
+
+function getActivePerson() {
+  return people.find((person) => person.id === activePersonId) || people[0];
+}
+
+function getVisiblePlants() {
+  const activePerson = getActivePerson();
+  if (activePerson.id === "all") {
+    return plants;
+  }
+
+  return activePerson.plants.map((name) => plantByName.get(name)).filter(Boolean);
+}
+
+function makePersonCard(person) {
+  const isActive = person.id === activePersonId;
+  const plantCount = person.id === "all" ? plants.length : person.plants.length;
+  const previewPlants = person.id === "all" ? "전체 식물 보기" : person.plants.slice(0, 5).join(", ");
+
+  return `
+    <button class="person-card ${isActive ? "is-active" : ""}" type="button" data-person="${person.id}">
+      <span class="person-card__name">${person.name}</span>
+      <span class="person-card__count">${plantCount}종</span>
+      <span class="person-card__subtitle">${person.subtitle}</span>
+      <span class="person-card__plants">${previewPlants}${person.plants.length > 5 ? "..." : ""}</span>
+    </button>
+  `;
+}
 
 function makeCard(plant) {
   return `
@@ -209,6 +354,7 @@ function makeRow(plant) {
 }
 
 function matchesSearch(plant, query) {
+  const activePerson = getActivePerson();
   const text = [
     plant.name,
     plant.type,
@@ -216,25 +362,44 @@ function matchesSearch(plant, query) {
     plant.water,
     plant.environment,
     plant.warning,
+    activePerson.name,
     ...plant.tags
   ].join(" ");
 
   return text.toLowerCase().includes(query.toLowerCase().trim());
 }
 
+function renderPeople() {
+  peopleGrid.innerHTML = people.map(makePersonCard).join("");
+
+  peopleGrid.querySelectorAll(".person-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      activePersonId = card.dataset.person;
+      render();
+      document.querySelector("#plants").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+}
+
 function render() {
+  const activePerson = getActivePerson();
   const query = searchInput.value;
-  const filtered = plants.filter((plant) => {
+  const filtered = getVisiblePlants().filter((plant) => {
     const filterMatch = activeFilter === "all" || plant.category === activeFilter;
     return filterMatch && matchesSearch(plant, query);
   });
 
+  plantSectionTitle.textContent = activePerson.id === "all" ? "전체 식물별 좋아하는 환경" : `${activePerson.name}의 식물 노트`;
+  activeProfileNote.textContent = `${activePerson.environment} ${activePerson.focus}`;
   grid.innerHTML = filtered.map(makeCard).join("");
   rows.innerHTML = filtered.map(makeRow).join("");
 
   if (filtered.length === 0) {
     grid.innerHTML = '<p class="empty">검색 조건에 맞는 식물이 없습니다.</p>';
+    rows.innerHTML = "";
   }
+
+  renderPeople();
 }
 
 chips.forEach((chip) => {

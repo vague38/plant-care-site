@@ -13,19 +13,21 @@
       <nav class="topbar" aria-label="주요 메뉴">
         <a class="brand" href="#">Plant Notes</a>
         <div class="topbar__links">
+          <a href="#people">사람별 노트</a>
           <a href="#plants">식물별 관리</a>
           <a href="#comparison">환경 비교</a>
           <a href="#routine">물주기 루틴</a>
         </div>
       </nav>
       <section class="hero__content">
-        <p class="eyebrow">집에서 키우는 식물들을 위한 맞춤 관리표</p>
-        <h1>식물마다 다른 빛, 물, 흙 상태를 한눈에 정리하세요.</h1>
+        <p class="eyebrow">친구들의 집마다 다르게 보는 맞춤 식물 노트</p>
+        <h1>누가, 어디서, 어떤 식물을 키우는지에 맞춰 관리하세요.</h1>
         <p>
-          오렌지자스민, 스킨답서스, 로즈마리, 바질, 버터헤드, 녹보수처럼 성격이 다른 식물들을
-          같은 기준으로 묶지 않고 각각의 리듬에 맞춰 관리할 수 있게 구성했습니다.
+          조련사, 아즈, Thomas가 키우는 식물을 각자의 목록으로 나누고, 전체 도감에서는
+          식물별 빛, 물, 통풍, 주의 신호를 함께 비교할 수 있게 구성했습니다.
         </p>
         <div class="hero__actions">
+          <a class="button button--primary" href="#people">사람별 노트 보기</a>
           <a class="button button--primary" href="#plants">관리표 보기</a>
           <a class="button button--ghost" href="#routine">오늘 루틴 확인</a>
         </div>
@@ -33,24 +35,33 @@
     </header>
 
     <main>
+      <section class="people-section" id="people">
+        <div class="section__heading">
+          <p class="eyebrow">Personal Plant Notes</p>
+          <h2>누구의 식물 노트를 볼까요?</h2>
+        </div>
+        <div class="people-grid" id="peopleGrid"></div>
+      </section>
+
       <section class="toolbar" aria-label="식물 검색과 필터">
         <label class="search">
           <span>검색</span>
-          <input id="searchInput" type="search" placeholder="예: 바질, 밝은 빛, 겉흙">
+          <input id="searchInput" type="search" placeholder="예: 바질, 조련사, 밝은 빛, 겉흙">
         </label>
         <div class="chips" id="filterChips" aria-label="식물 분류 필터">
           <button class="chip is-active" type="button" data-filter="all">전체</button>
           <button class="chip" type="button" data-filter="flower">꽃/향</button>
           <button class="chip" type="button" data-filter="foliage">관엽</button>
           <button class="chip" type="button" data-filter="herb">허브</button>
-          <button class="chip" type="button" data-filter="edible">먹는 잎채소</button>
+          <button class="chip" type="button" data-filter="edible">채소/수확</button>
         </div>
       </section>
 
       <section class="section" id="plants">
         <div class="section__heading">
           <p class="eyebrow">Plant Care Cards</p>
-          <h2>식물별 좋아하는 환경</h2>
+          <h2 id="plantSectionTitle">전체 식물별 좋아하는 환경</h2>
+          <p class="section__note" id="activeProfileNote">전체 도감 기준으로 모든 식물을 보여줍니다.</p>
         </div>
         <div class="plant-grid" id="plantGrid"></div>
       </section>
