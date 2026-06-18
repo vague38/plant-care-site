@@ -263,12 +263,9 @@ const plantByName = new Map(plants.map((plant) => [plant.name, plant]));
 const peopleGrid = document.querySelector("#peopleGrid");
 const grid = document.querySelector("#plantGrid");
 const rows = document.querySelector("#comparisonRows");
-const searchInput = document.querySelector("#searchInput");
-const chips = document.querySelectorAll(".chip");
 const plantSectionTitle = document.querySelector("#plantSectionTitle");
 const activeProfileNote = document.querySelector("#activeProfileNote");
 
-let activeFilter = "all";
 let activePersonId = "trainer";
 
 function getActivePerson() {
@@ -341,22 +338,6 @@ function makeRow(plant) {
   `;
 }
 
-function matchesSearch(plant, query) {
-  const activePerson = getActivePerson();
-  const text = [
-    plant.name,
-    plant.type,
-    plant.light,
-    plant.water,
-    plant.environment,
-    plant.warning,
-    activePerson.name,
-    ...plant.tags
-  ].join(" ");
-
-  return text.toLowerCase().includes(query.toLowerCase().trim());
-}
-
 function renderPeople() {
   peopleGrid.innerHTML = people.map(makePersonCard).join("");
 
@@ -371,11 +352,7 @@ function renderPeople() {
 
 function render() {
   const activePerson = getActivePerson();
-  const query = searchInput.value;
-  const filtered = getVisiblePlants().filter((plant) => {
-    const filterMatch = activeFilter === "all" || plant.category === activeFilter;
-    return filterMatch && matchesSearch(plant, query);
-  });
+  const filtered = getVisiblePlants();
 
   plantSectionTitle.textContent = `${activePerson.name}의 식물 노트`;
   activeProfileNote.textContent = `${activePerson.environment} ${activePerson.focus}`;
@@ -389,16 +366,5 @@ function render() {
 
   renderPeople();
 }
-
-chips.forEach((chip) => {
-  chip.addEventListener("click", () => {
-    chips.forEach((item) => item.classList.remove("is-active"));
-    chip.classList.add("is-active");
-    activeFilter = chip.dataset.filter;
-    render();
-  });
-});
-
-searchInput.addEventListener("input", render);
 
 render();
