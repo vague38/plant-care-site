@@ -109,7 +109,11 @@ a {
   font-size: clamp(2.2rem, 6vw, 5.35rem);
   line-height: 1.05;
   letter-spacing: 0;
-  max-width: 12ch;
+  max-width: 15ch;
+}
+
+.hero h1 span {
+  display: block;
 }
 
 .hero p:not(.eyebrow) {
